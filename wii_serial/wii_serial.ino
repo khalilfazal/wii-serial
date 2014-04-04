@@ -12,14 +12,25 @@ void setup() {
   Serial.println("Ready");
 }
 
+// forward -> left
+// back -> right
+// left -> back
+// right -> forward
+
 void loop() {
   if (nunchuk_get_data() > 0) {
     // at this point, nunchuk_buf contains data
+    int angle = nunchuk_joyangle() - 90;
+    
+    if (angle < 0) {
+      angle += 360;
+    }
+    
     Serial.print(nunchuk_zbutton());
     Serial.print(" ");
     Serial.print(nunchuk_cbutton());
     Serial.print(" ");
-    Serial.print(nunchuk_joyangle());
+    Serial.print(angle);
     Serial.print(" ");
     Serial.print(nunchuk_joyrad());
     Serial.print(" ");
